@@ -11,17 +11,28 @@
 
 // };
 
-void criaArquivosTeste(unsigned char* qtz_img, unsigned char* s_qtz_img, int nivel){
+void criaArquivosTeste(unsigned char* qtz_img, unsigned char* s_qtz_img, int nivel, char *n_arquivo, char *s_n_arquivo){
 
 	FILE *fp, *sfp;
-	char ch;
+    char full_path_1[100] = "./imagens_quantizadas/q";
+    char full_path_2[100] = "./imagens_quantizadas/q";
 
-	if (!(fp = fopen("qtz.pgm","w"))){
+    sprintf(full_path_1 + strlen(full_path_1), "%d_", nivel);
+    sprintf(full_path_2 + strlen(full_path_2), "%d_", nivel);
+
+    strcat(full_path_1, n_arquivo);
+    strcat(full_path_2, s_n_arquivo);
+
+    printf("\nfull_path1: %s\n", full_path_1);
+    printf("\nfull_path12: %s\n", full_path_2);
+
+    printf("\n*****CHEGOU ATE AQUI 8\n");
+	if (!(fp = fopen(full_path_1,"w"))){
 		perror("Erro.");
 		exit(1);
 	}
 
-    if (!(sfp = fopen("suav_qtz.pgm","w"))){
+    if (!(sfp = fopen(full_path_2,"w"))){
 		perror("Erro.");
 		exit(1);
 	}
@@ -46,25 +57,23 @@ void criaArquivosTeste(unsigned char* qtz_img, unsigned char* s_qtz_img, int niv
 
 }
 
-void quantizarImagens(char *filename, char *s_filename ) {
+void quantizarImagens(char *filename, char *s_filename, int nivel) {
 
-    int nivel;
     struct pgm imagem, s_imagem;
     unsigned char *q_img, *q_s_img;
 
-    printf("Escolha o nivel de quantizacao...\n");
-    printf("Numero entre 2 e 128 divisivel por 2^x...\n");
-    printf("Nivel: ");
-    scanf("%d", &nivel);
-
     int intervalo = 256 / nivel;
 
-    readPGMImage(&imagem, filename);
-    readPGMImage(&s_imagem, s_filename);
+    printf("\n*****CHEGOU ATE AQUI 4\n");
+    readPGMImage(&imagem, filename, 0);
+    printf("\n*****CHEGOU ATE AQUI 4.5\n");
+    readPGMImage(&s_imagem, s_filename, 1);
 
+    printf("\n*****CHEGOU ATE AQUI 5\n");
     q_img = (unsigned char*) malloc(imagem.r * imagem.c * sizeof(unsigned char));
     q_s_img = (unsigned char*) malloc(s_imagem.r * s_imagem.c * sizeof(unsigned char));
 
+    printf("\n*****CHEGOU ATE AQUI 5.5\n");
     for (int i = 0; i < (imagem.r * imagem.c); i++) {
 
         *(q_img + i) = *(imagem.pData + i) / intervalo;
@@ -72,7 +81,8 @@ void quantizarImagens(char *filename, char *s_filename ) {
 
     }
 
-    criaArquivosTeste(q_img, q_s_img, nivel);
+    printf("\n*****CHEGOU ATE AQUI 6\n");
+    // criaArquivosTeste(q_img, q_s_img, nivel, filename, s_filename);
 	
 
 	printf("\n");

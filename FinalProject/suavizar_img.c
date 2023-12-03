@@ -153,7 +153,11 @@ void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSua
 
     printf("Nova imagem (%s) a ser criada.\n", nomeImgSuavizada);
 
-    if (!(fp = fopen(nomeImgSuavizada, "w"))) {
+
+    char path[100] = "./imagens_suavizadas/";
+
+
+    if (!(fp = fopen(strcat(path, nomeImgSuavizada), "w"))) {
         
 		perror("Erro.");
 		exit(1);
@@ -180,5 +184,5 @@ void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSua
     }
 
     fclose(fp);
-    
+
 }

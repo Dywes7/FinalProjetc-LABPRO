@@ -7,17 +7,33 @@ struct pgm{
 	unsigned char *pData;	// Ponteiro para os dados
 };
 
-void readPGMImage(struct pgm *, char *);
+void readPGMImage(struct pgm *, char *, int);
 void viewPGMImage(struct pgm *);
 void writePGMImage(struct pgm *, char *);
 
-void readPGMImage(struct pgm *pio, char *filename){
+void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
 	FILE *fp;
 	char ch;
+	const char *caminhos[] = {"./imagens_originais/", "./imagens_suavizadas/"};
+	char full_path[100];
 
-	if (!(fp = fopen(filename,"r"))) {
+	// MODIFICANDO CAMINHOS
+	if (i_path == 3) {
 
+		strcpy(full_path, filename);
+
+	} else {
+
+		strcpy(full_path, caminhos[i_path]);
+		strcat(full_path, filename);
+
+	}
+	
+	printf("\nFull_path: %s\n", full_path);
+
+	if (!(fp = fopen(full_path, "r"))) {
+	
 		perror("Erro.");
 		exit(1);
 
