@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include "pgm.c"
 #include "suavizar_img.c"
+#include "quantizar.c"
 
 /* 
 
@@ -25,18 +26,24 @@
 
 int main(int argc, char *argv[]){
 
-	struct pgm img;
+	//struct pgm img;
 
-	if (argc != 2){
-		printf("Formato: \n\t %s <imagemEntrada.pgm>\n", argv[0]);
-		exit(1);
-	}
+	// if (argc != 2){
+	// 	printf("Formato: \n\t %s <Nivel de Quantização>\n", argv[0]);
+	// 	exit(1);
+	// }
 
 	DIR *d;
 	struct dirent *dir;
+	struct pgm img_original;
+	struct pgm img_suavizada;
 	d = opendir("./images");
+	int nivel;
 
 	if(d) {
+		
+		printf("nivel de quantização: ");
+		scanf("%d",&nivel);
 		while ((dir = readdir(d)) != NULL){
 
 			if(dir->d_name[0] == '.' ){
@@ -44,9 +51,15 @@ int main(int argc, char *argv[]){
       		}
 
 			printf("%s\n", dir->d_name);
-			readPGMImage(&img,dir->d_name);
+			readPGMImage(&img_original,dir->d_name);
+			quantizarImg(img_original.pData,img_original.r, img_original.c,nivel);
+
+			char nome[100] = {"./imgsQuantizadas/quantizada_"};
+			strcat(nome,dir->d_name);
+			writePGMImage(&img_original,nome);
+
 			//viewPGMImage(&img);
-			gerarImgSuavizada(&img, dir->d_name);
+			gerarImgSuavizada(&img_suavizada, dir->d_name);
 
 		}
 		closedir(d);
