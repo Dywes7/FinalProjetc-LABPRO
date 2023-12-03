@@ -1,4 +1,3 @@
-
 struct pgm{
 	int tipo;		// TIPO P2 ou P5
 	int c;			// Colunas
@@ -15,35 +14,44 @@ void readPGMImage(struct pgm *pio, char *filename){
 
 	FILE *fp;
 	char ch;
-	char path[50] = {"images/"};
 
-	if (!(fp = fopen(strcat(path,filename),"r"))){
+	//char path[50] = {"images/"};
+
+	if (!(fp = fopen(filename,"r"))){
 		perror("Erro.");
 		exit(1);
 	}
 
 	if ( (ch = getc(fp))!='P'){
+
 		puts("A imagem fornecida não está no formato pgm");
 		exit(2);
+
 	}
 	
 	pio->tipo = getc(fp)-48;
 	
 	fseek(fp,1, SEEK_CUR);
 
-	while((ch=getc(fp))=='#'){
-		while( (ch=getc(fp))!='\n');
+	while((ch=getc(fp)) == '#'){
+
+		while( (ch=getc(fp)) != '\n');
+
 	}
 
 	fseek(fp, -2, SEEK_CUR);
 
 	fscanf(fp, "%d %d",&pio->c,&pio->r);
-	if (ferror(fp)){ 
+
+	if (ferror(fp)) { 
+
 		perror(NULL);
 		exit(3);
+
 	}	
-	fscanf(fp, "%d",&pio->mv);
-	fseek(fp,1, SEEK_CUR);
+
+	fscanf(fp, "%d", &pio->mv);
+	fseek(fp, 1, SEEK_CUR);
 
 	pio->pData = (unsigned char*) malloc(pio->r * pio->c * sizeof(unsigned char));
 
@@ -85,14 +93,19 @@ void writePGMImage(struct pgm *pio, char *filename){
 
 }
 
-void viewPGMImage(struct pgm *pio){
+
+void viewPGMImage(struct pgm *pio) {
+
 	printf("Tipo: %d\n",pio->tipo);
 	printf("Dimensões: [%d %d]\n",pio->c, pio->r);
 	printf("Max: %d\n",pio->mv);
 
 	for (int k=0; k < (pio->r * pio->c); k++){
+
 		if (!( k % pio->c)) printf("\n");
 		printf("%2hhu ",*(pio->pData+k));
+		
 	}	
+
 	printf("\n");
 }
