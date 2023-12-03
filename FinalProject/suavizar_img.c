@@ -65,9 +65,9 @@ void gerarImgSuavizada(struct pgm *pio, char *filename) {
     FILE *fp;
 
     char ch;
-    char nomeImgSuavizada[100] = "suavizado_";
+    char nomeImgSuavizada[100] = {"imgSuavizadas/suavizado_"};
     strcat(nomeImgSuavizada, filename);
-
+	
     printf("nome arquivo: %s\n", nomeImgSuavizada);
 
     if (!(fp = fopen(nomeImgSuavizada, "w"))) {
@@ -83,5 +83,4 @@ void gerarImgSuavizada(struct pgm *pio, char *filename) {
 	fprintf(fp, "%d\n", 255);
 
     janelaTresPorTres(pio, fp);
-    
 }

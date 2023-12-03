@@ -15,8 +15,9 @@ void readPGMImage(struct pgm *pio, char *filename){
 
 	FILE *fp;
 	char ch;
+	char path[50] = {"images/"};
 
-	if (!(fp = fopen(filename,"r"))){
+	if (!(fp = fopen(strcat(path,filename),"r"))){
 		perror("Erro.");
 		exit(1);
 	}
@@ -83,7 +84,6 @@ void writePGMImage(struct pgm *pio, char *filename){
 	fclose(fp);
 
 }
-
 
 void viewPGMImage(struct pgm *pio){
 	printf("Tipo: %d\n",pio->tipo);
