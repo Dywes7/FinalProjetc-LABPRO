@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include "pgm.c"
 #include "suavizar_img.c"
 
@@ -31,19 +32,25 @@ int main(int argc, char *argv[]){
 		exit(1);
 	}
 
-	readPGMImage(&img,argv[1]);
+	DIR *d;
+	struct dirent *dir;
+	d = opendir("./images");
 
-	// writePGMImage(&img, argv[2]);
+	if(d) {
+		while ((dir = readdir(d)) != NULL){
 
-	viewPGMImage(&img);
+			if(dir->d_name[0] == '.' ){
+        		continue;
+      		}
 
-	// printf("TIPO: %d\n", img.tipo);
-	// printf("Colunas: %d, Linhas: %d\n", img.c, img.r);
-	// printf("MaxValue: %d\n", img.mv);
+			printf("%s\n", dir->d_name);
+			readPGMImage(&img,dir->d_name);
+			//viewPGMImage(&img);
+			gerarImgSuavizada(&img, dir->d_name);
 
-	gerarImgSuavizada(&img, argv[1]);
-
+		}
+		closedir(d);
+	}
+	
 	return 0;
-
 }
-
