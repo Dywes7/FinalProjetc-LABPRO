@@ -3,6 +3,7 @@
 #include <string.h>
 #include "pgm.c"
 #include "suavizar_img.c"
+#include "quantizar_imgs.c"
 
 /* 
 
@@ -25,6 +26,7 @@
 int main(int argc, char *argv[]){
 
 	struct pgm img;
+	char name_img_suavizada[100];
 
 	if (argc != 2){
 		printf("Formato: \n\t %s <imagemEntrada.pgm>\n", argv[0]);
@@ -34,14 +36,30 @@ int main(int argc, char *argv[]){
 	readPGMImage(&img,argv[1]);
 
 	// writePGMImage(&img, argv[2]);
-
-	viewPGMImage(&img);
+	// viewPGMImage(&img);
 
 	// printf("TIPO: %d\n", img.tipo);
 	// printf("Colunas: %d, Linhas: %d\n", img.c, img.r);
 	// printf("MaxValue: %d\n", img.mv);
 
-	gerarImgSuavizada(&img, argv[1]);
+	int option;
+	printf("Selecionar Filtro da Media...\n");
+    printf("Digite 0 para janela 3x3.\n");
+    printf("Digite 1 para janela 5x5.\n");
+	printf("Digite 2 para janela 7x7.\n");
+    printf("Valor (0-1-2): ");
+    scanf("%d", &option);
+
+	if (option < 0 || option > 2) {
+
+		printf("Operacao invalida.\n");
+		exit(2);
+
+	}
+
+ 	gerarImgSuavizada(&img, argv[1], option, name_img_suavizada);
+
+	quantizarImagens(argv[1], name_img_suavizada);
 
 	return 0;
 
