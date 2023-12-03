@@ -1,10 +1,10 @@
 
 struct pgm{
-	int tipo;
-	int c;
-	int r;
-	int mv;
-	unsigned char *pData;
+	int tipo;		// TIPO P2 ou P5
+	int c;			// Colunas
+	int r;			// Linhas
+	int mv;			// MaxValue
+	unsigned char *pData;	// Ponteiro para os dados
 };
 
 void readPGMImage(struct pgm *, char *);
@@ -34,7 +34,7 @@ void readPGMImage(struct pgm *pio, char *filename){
 		while( (ch=getc(fp))!='\n');
 	}
 
-	fseek(fp,-1, SEEK_CUR);
+	fseek(fp, -2, SEEK_CUR);
 
 	fscanf(fp, "%d %d",&pio->c,&pio->r);
 	if (ferror(fp)){ 
