@@ -23,6 +23,6 @@ void janelaCincoPorCinco(struct pgm*, FILE*);
 void janelaSetePorSete(struct pgm*, FILE*);
 void quantizarImagens(char *, char *, int, unsigned char **, unsigned char **);
 void criaArquivosTeste(unsigned char*, unsigned char*, int, char *, char *);
-void gerarMatrizSCM(unsigned char *, unsigned char *, struct pgm *, int);
+void gerarMatrizSCM(unsigned char *, unsigned char *, struct pgm *, int, char);
 
 #endif

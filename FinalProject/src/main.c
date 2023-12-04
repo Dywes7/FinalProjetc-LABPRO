@@ -94,7 +94,7 @@ int main(int argc, char *argv[]){
 			quantizarImagens(dir->d_name, name_img_suavizada, nivel, &quant_img, &quant_s_img);
 
 			// printf("\n*****CHEGOU ATE AQUI 4\n");
-			gerarMatrizSCM(quant_img, quant_s_img, &img, nivel);	
+			gerarMatrizSCM(quant_img, quant_s_img, &img, nivel, dir->d_name[0]);	
 
 			end = clock();
 
