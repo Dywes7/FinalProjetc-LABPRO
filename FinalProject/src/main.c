@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
+#include <time.h>
 
-#include "./libs/pgm.h"
-#include "./libs/menu.h"
-#include "./libs/suavizar_img.h"
-#include "./libs/quantizar_imgs.h"
-#include "./libs/gerar_matriz_scm.h"
+#include "../include/pgm.h"
+
+#include "../include/menu.h"
+// #include "../include/suavizar_img.h"
+// #include "../include/quantizar_imgs.h"
+// #include "../include/gerar_matriz_scm.h"
 
 /* 
 
@@ -37,6 +39,12 @@ int main(int argc, char *argv[]){
 
 	// Ponteiros para elementos das matrizes quantizadas
 	unsigned char *quant_img, *quant_s_img;
+	
+	int k;
+	clock_t begin, end;
+	double time_per_img, time_total=0;
+	long long int a = 999999999;
+
 
 	if (argc != 2){
 
@@ -59,9 +67,10 @@ int main(int argc, char *argv[]){
 	/************* LOOPING DE DIRETORIO *************/
 	DIR *d;
     struct dirent *dir;
-    d = opendir("./imagens_originais");
+    d = opendir("./images/imagens_originais");
 
     if (d) {
+	
 
         while ((dir = readdir(d)) != NULL) {
 
@@ -70,6 +79,8 @@ int main(int argc, char *argv[]){
         		continue;
 
       		}
+
+			begin = clock();
 
             printf("%s\n", dir->d_name);
 
@@ -84,10 +95,16 @@ int main(int argc, char *argv[]){
 
 			// printf("\n*****CHEGOU ATE AQUI 4\n");
 			gerarMatrizSCM(quant_img, quant_s_img, &img, nivel);	
+
+			end = clock();
+
+			time_total = (double)(end - begin) / CLOCKS_PER_SEC;
+
         }
 
-        closedir(d);
+		printf("Tempo Total: %lf\n",time_total);
 
+        closedir(d);
     }
 
 	return 0;

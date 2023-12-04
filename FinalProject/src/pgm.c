@@ -1,10 +1,10 @@
-#include "./libs/pgm.h"
+#include "../include/pgm.h"
 
 void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
 	FILE *fp;
 	char ch;
-	const char *caminhos[] = {"./imagens_originais/", "./imagens_suavizadas/"};
+	const char *caminhos[] = {"./images/imagens_originais/", "./images/imagens_suavizadas/"};
 	char full_path[100];
 
 	// MODIFICANDO CAMINHOS

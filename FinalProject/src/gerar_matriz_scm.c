@@ -1,4 +1,4 @@
-#include "./libs/pgm.h"
+#include "../include/pgm.h"
 void gerarMatrizSCM(unsigned char *qtz_img, unsigned char *qtz_s_img, struct pgm *imagem, int level) {
 
     // printf("\n*****CHEGOU ATE AQUI 10\n");

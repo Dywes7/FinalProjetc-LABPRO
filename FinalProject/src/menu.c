@@ -1,4 +1,4 @@
-#include "./libs/menu.h"
+#include "../include/menu.h"
 void menuFiltroMedio(){
     printf("Selecionar Filtro da Media...\n");
     printf("Digite 0 para janela 3x3.\n");

@@ -1,10 +1,10 @@
-#include "./libs/pgm.h"
+#include "../include/pgm.h"
 
 void criaArquivosTeste(unsigned char* qtz_img, unsigned char* s_qtz_img, int nivel, char *n_arquivo, char *s_n_arquivo){
 
 	FILE *fp, *sfp;
-    char full_path_1[100] = "./imagens_quantizadas/q";
-    char full_path_2[100] = "./imagens_quantizadas/q";
+    char full_path_1[100] = "./images/imagens_quantizadas/q";
+    char full_path_2[100] = "./images/imagens_quantizadas/q";
 
     sprintf(full_path_1 + strlen(full_path_1), "%d_", nivel);
     sprintf(full_path_2 + strlen(full_path_2), "%d_", nivel);
@@ -72,7 +72,7 @@ void quantizarImagens(char *filename, char *s_filename, int nivel, unsigned char
 
     }
 
-    criaArquivosTeste(*q_img, *q_s_img, nivel, filename, s_filename);
+    //criaArquivosTeste(*q_img, *q_s_img, nivel, filename, s_filename);
 
 	printf("\n");
 }

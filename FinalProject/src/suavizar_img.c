@@ -1,4 +1,4 @@
-#include "./libs/pgm.h"
+#include "../include/pgm.h"
 
 void janelaSetePorSete(struct pgm *imagem, FILE *newArquivo) {
 
@@ -136,7 +136,7 @@ void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSua
     // printf("Nova imagem (%s) a ser criada.\n", nomeImgSuavizada);
 
 
-    char path[100] = "./imagens_suavizadas/";
+    char path[100] = "./images/imagens_suavizadas/";
 
 
     if (!(fp = fopen(strcat(path, nomeImgSuavizada), "w"))) {
