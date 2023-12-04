@@ -30,7 +30,7 @@ void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
 	}
 	
-	printf("\nFull_path: %s\n", full_path);
+	// printf("\nFull_path: %s\n", full_path);
 
 	if (!(fp = fopen(full_path, "r"))) {
 	

@@ -24,7 +24,7 @@ void janelaSetePorSete(struct pgm *imagem, FILE *newArquivo) {
     for (int i = 0; i < (imagem->c * imagem->r); i ++) {
 
         int soma = 0;   // Inicializando somatorio
-        int linha = i / imagem->c;  // Identificar linha o elemento
+        int linha = i / imagem->c;  // Identificar linha do elemento
         int coluna = i % imagem->c; // Identificar coluna do elemento
 
         // CASO PARA ELEMENTO DA MATRIZ QUE NÃO ESTÁ NAS DUAS CAMADAS MAIS EXTERNAS
@@ -60,7 +60,7 @@ void janelaCincoPorCinco(struct pgm *imagem, FILE *newArquivo) {
     for (int i = 0; i < (imagem->c * imagem->r); i ++) {
 
         int soma = 0;   // Inicializando somatorio
-        int linha = i / imagem->c;  // Identificar linha o elemento
+        int linha = i / imagem->c;  // Identificar linha do elemento
         int coluna = i % imagem->c; // Identificar coluna do elemento
 
         // CASO PARA ELEMENTO DA MATRIZ QUE NÃO ESTÁ NAS DUAS CAMADAS MAIS EXTERNAS
@@ -151,7 +151,7 @@ void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSua
     strcat(nomeImgSuavizada, filename);
 
 
-    printf("Nova imagem (%s) a ser criada.\n", nomeImgSuavizada);
+    // printf("Nova imagem (%s) a ser criada.\n", nomeImgSuavizada);
 
 
     char path[100] = "./imagens_suavizadas/";

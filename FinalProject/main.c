@@ -5,6 +5,7 @@
 #include "pgm.c"
 #include "suavizar_img.c"
 #include "quantizar_imgs.c"
+#include "gerar_matriz_scm.c"
 
 /* 
 
@@ -25,13 +26,21 @@
 */
 
 int main(int argc, char *argv[]){
-
+	
+	// Estrutura para imagem
 	struct pgm img;
+
+	// Nome para o arquivo da imagem suvizada gerada
 	char name_img_suavizada[100];
 
+	// Ponteiros para elementos das matrizes quantizadas
+	unsigned char *quant_img, *quant_s_img;
+
 	if (argc != 2){
+
 		printf("Formato: \n\t %s <quantidade de niveis>\n", argv[0]);
 		exit(1);
+
 	}
 
 	int nivel = atoi(argv[1]);
@@ -74,19 +83,22 @@ int main(int argc, char *argv[]){
 
             printf("%s\n", dir->d_name);
 
-			printf("\n*****CHEGOU ATE AQUI 1\n");
+			// printf("\n*****CHEGOU ATE AQUI 1\n");
 			readPGMImage(&img, dir->d_name, 0);
-			printf("\n*****CHEGOU ATE AQUI 2\n");
-			gerarImgSuavizada(&img, dir->d_name, option, name_img_suavizada);
-			printf("\n*****CHEGOU ATE AQUI 3\n");
-			quantizarImagens(dir->d_name, name_img_suavizada, nivel);
 
+			// printf("\n*****CHEGOU ATE AQUI 2\n");
+			gerarImgSuavizada(&img, dir->d_name, option, name_img_suavizada);
+
+			// printf("\n*****CHEGOU ATE AQUI 3\n");
+			quantizarImagens(dir->d_name, name_img_suavizada, nivel, &quant_img, &quant_s_img);
+
+			// printf("\n*****CHEGOU ATE AQUI 4\n");
+			gerarMatrizSCM(quant_img, quant_s_img, &img, nivel);	
         }
 
         closedir(d);
 
     }
-
 
 	return 0;
 
