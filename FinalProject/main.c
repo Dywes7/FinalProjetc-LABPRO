@@ -6,7 +6,6 @@
 #include "suavizar_img.c"
 #include "quantizar_imgs.c"
 
-
 /* 
 
 1. GERAR DADOS DA IMAGEM PGM (pgm.c)
@@ -27,76 +26,68 @@
 
 int main(int argc, char *argv[]){
 
+	struct pgm img;
 	char name_img_suavizada[100];
 
-	DIR *d;
-	struct dirent *dir;
-	struct pgm img_original;
-	struct pgm img_suavizada;
-	d = opendir("./images");
-	int nivel;
+	if (argc != 2){
+		printf("Formato: \n\t %s <quantidade de niveis>\n", argv[0]);
+		exit(1);
+	}
 
-	if(d) {
-		int option;
-		printf("Selecionar Filtro da Media...\n");
-    	printf("Digite 0 para janela 3x3.\n");
-    	printf("Digite 1 para janela 5x5.\n");
-		printf("Digite 2 para janela 7x7.\n");
-    	printf("Valor (0-1-2): ");
-    	scanf("%d", &option);
+	int nivel = atoi(argv[1]);
 
-		if (option < 0 || option > 2) {
-			printf("Operacao invalida.\n");
-			exit(2);
-		}
+	// readPGMImage(&img, argv[1]);
+	// writePGMImage(&img, argv[2]);
+	// viewPGMImage(&img);
 
-		
-    	printf("Escolha o nivel de quantizacao...\n");
-    	printf("Numero entre 2 e 128 divisivel por 2^x...\n");
-    	printf("Nivel: ");
-    	scanf("%d", &nivel);
-	
-		while ((dir = readdir(d)) != NULL){
+	int option;
+	printf("Selecionar Filtro da Media...\n");
+    printf("Digite 0 para janela 3x3.\n");
+    printf("Digite 1 para janela 5x5.\n");
+	printf("Digite 2 para janela 7x7.\n");
+    printf("Valor (0-1-2): ");
+    scanf("%d", &option);
 
-			if(dir->d_name[0] == '.' ){
-        		continue;
-      		}
+	if (option < 0 || option > 2) {
 
-			printf("Nome imagem original:  %s\n\n", dir->d_name);
+		printf("Operacao invalida.\n");
+		exit(2);
 
-			char path[50] = {"images/"};
-			strcat(path,dir->d_name);
-			readPGMImage(&img_original,path);
-			
-
-			gerarImgSuavizada(&img_original,dir->d_name , option, name_img_suavizada);
-
-		
-			quantizarImagens(path, name_img_suavizada,nivel);
-
-			// char nome[100] = {"./imgsQuantizadas/quantizada_"};
-			// strcat(nome,dir->d_name);
-			// writePGMImage(&img_original,nome);
-
-			// char nome[100] = {"./imgsQuantizadas/quantizada_"};
-			// strcat(nome,dir->d_name);
-			// writePGMImage(&img_original,nome);
-
-
-			// //quantizarImg(img_original.pData,img_original.r, img_original.c,nivel);
-
-			// char nome[100] = {"./imgsQuantizadas/quantizada_"};
-			// strcat(nome,dir->d_name);
-			// writePGMImage(&img_original,nome);
-
-			// gerarImgSuavizada(&img_original, argv[1], option, name_img_suavizada);
-			// quantizarImagens(argv[1], name_img_suavizada);
-
-			// gerarImgSuavizada(&img_suavizada, dir->d_name);
-
-		}
-		closedir(d);
 	}
 	
+
+
+	/************* LOOPING DE DIRETORIO *************/
+	DIR *d;
+    struct dirent *dir;
+    d = opendir("./imagens_originais");
+
+    if (d) {
+
+        while ((dir = readdir(d)) != NULL) {
+
+			if(dir->d_name[0] == '.' ){
+
+        		continue;
+
+      		}
+
+            printf("%s\n", dir->d_name);
+
+			printf("\n*****CHEGOU ATE AQUI 1\n");
+			readPGMImage(&img, dir->d_name, 0);
+			printf("\n*****CHEGOU ATE AQUI 2\n");
+			gerarImgSuavizada(&img, dir->d_name, option, name_img_suavizada);
+			printf("\n*****CHEGOU ATE AQUI 3\n");
+			quantizarImagens(dir->d_name, name_img_suavizada, nivel);
+			
+        }
+
+        closedir(d);
+
+    }
+
+
 	return 0;
+
 }

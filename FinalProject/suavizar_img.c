@@ -130,6 +130,7 @@ void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSua
 
     FILE *fp;
     char ch;
+    // char nomeImgSuavizada[100];
 
     // ALTERANDO NOME DO ARQUIVO A SER GERADO DE ACORDO COM A JANELA ESCOLHIDA
     switch (op) {
@@ -146,29 +147,27 @@ void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSua
 
     }
 
-    //char path[100] = {"imgSuavizadas/"};
     // JUTANDO O NOME 'suavizadoYxY_' com o nome original da imagem
-
-    nomeImgSuavizada = strcat(nomeImgSuavizada,filename);
+    strcat(nomeImgSuavizada, filename);
 
 
     printf("Nova imagem (%s) a ser criada.\n", nomeImgSuavizada);
 
 
-    if (!(fp = fopen(nomeImgSuavizada, "w"))) {
+    char path[100] = "./imagens_suavizadas/";
+
+
+    if (!(fp = fopen(strcat(path, nomeImgSuavizada), "w"))) {
         
 		perror("Erro.");
 		exit(1);
 
 	}
 
-    //fprintf(fp, "%s\n", (pio->tipo == 2) ? "P2" : "P5");
+    // fprintf(fp, "%s\n", (pio->tipo == 2) ? "P2" : "P5");
     fprintf(fp, "%s\n", "P2");
 	fprintf(fp, "%d %d\n",pio->c, pio->r);
 	fprintf(fp, "%d\n", 255);
-
-
-    janelaTresPorTres(pio, fp);
 
     switch (op) {
         case 0:
@@ -185,5 +184,5 @@ void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSua
     }
 
     fclose(fp);
-    
+
 }

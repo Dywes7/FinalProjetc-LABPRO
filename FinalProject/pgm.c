@@ -1,25 +1,31 @@
-struct pgm{
-	int tipo;		// TIPO P2 ou P5
-	int c;			// Colunas
-	int r;			// Linhas
-	int mv;			// MaxValue
-	unsigned char *pData;	// Ponteiro para os dados
-};
+#include "libs/pgm.h"
 
-void readPGMImage(struct pgm *, char *);
-void viewPGMImage(struct pgm *);
-void writePGMImage(struct pgm *, char *);
-
-void readPGMImage(struct pgm *pio, char *filename){
+void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
 	FILE *fp;
 	char ch;
+	const char *caminhos[] = {"./imagens_originais/", "./imagens_suavizadas/"};
+	char full_path[100];
 
-	//char path[50] = {"images/"};
+	// MODIFICANDO CAMINHOS
+	if (i_path == 3) {
 
-	if (!(fp = fopen(filename,"r"))){
+		strcpy(full_path, filename);
+
+	} else {
+
+		strcpy(full_path, caminhos[i_path]);
+		strcat(full_path, filename);
+
+	}
+	
+	printf("\nFull_path: %s\n", full_path);
+
+	if (!(fp = fopen(full_path, "r"))) {
+	
 		perror("Erro.");
 		exit(1);
+
 	}
 
 	if ( (ch = getc(fp))!='P'){
@@ -31,7 +37,16 @@ void readPGMImage(struct pgm *pio, char *filename){
 	
 	pio->tipo = getc(fp)-48;
 	
-	fseek(fp,1, SEEK_CUR);
+	//fseek(fp,1, SEEK_CUR);
+
+	#ifdef __linux__
+    	fseek(fp, 1, SEEK_CUR);
+  	#elif _WIN32
+    	fseek(fp, 0, SEEK_CUR);
+  	#elif __APPLE__
+    	fseek(fp, 1, SEEK_CUR);
+  	#endif
+
 
 	while((ch=getc(fp)) == '#'){
 
