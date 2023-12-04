@@ -1,4 +1,4 @@
-#include "libs/pgm.h"
+#include "./libs/pgm.h"
 
 void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
@@ -19,7 +19,7 @@ void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
 	}
 	
-	printf("\nFull_path: %s\n", full_path);
+	// printf("\nFull_path: %s\n", full_path);
 
 	if (!(fp = fopen(full_path, "r"))) {
 	
@@ -37,16 +37,7 @@ void readPGMImage(struct pgm *pio, char *filename, int i_path){
 	
 	pio->tipo = getc(fp)-48;
 	
-	//fseek(fp,1, SEEK_CUR);
-
-	#ifdef __linux__
-    	fseek(fp, 1, SEEK_CUR);
-  	#elif _WIN32
-    	fseek(fp, 0, SEEK_CUR);
-  	#elif __APPLE__
-    	fseek(fp, 1, SEEK_CUR);
-  	#endif
-
+	fseek(fp,1, SEEK_CUR);
 
 	while((ch=getc(fp)) == '#'){
 
@@ -66,7 +57,15 @@ void readPGMImage(struct pgm *pio, char *filename, int i_path){
 	}	
 
 	fscanf(fp, "%d", &pio->mv);
-	fseek(fp, 1, SEEK_CUR);
+	//fseek(fp, 1, SEEK_CUR);
+
+	#ifdef __linux__
+    	fseek(fp, 1, SEEK_CUR);
+  	#elif _WIN32
+    	fseek(fp, 0, SEEK_CUR);
+  	#elif __APPLE__
+    	fseek(fp, 1, SEEK_CUR);
+  	#endif
 
 	pio->pData = (unsigned char*) malloc(pio->r * pio->c * sizeof(unsigned char));
 

@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
 
 struct pgm{
 	int tipo;		// TIPO P2 ou P5
