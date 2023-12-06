@@ -72,7 +72,7 @@ void janelaCincoPorCinco(struct pgm *imagem, FILE *newArquivo) {
 
 }
 
-void janelaTresPorTres(struct pgm *imagem, FILE *newArquivo) {
+void janelaTresPorTres(struct pgm *imagem, FILE *newArquivo, int op) {
 
     // ITERANDO SOBRE TODOS OS ELEMENTOS DA MATRIZ DA IMAGEM
    for (int i = 0; i < (imagem->c * imagem->r); i ++) {
@@ -98,73 +98,60 @@ void janelaTresPorTres(struct pgm *imagem, FILE *newArquivo) {
 
             }
 
-            fprintf(newArquivo, "%hhu ", soma / 9);
-
+            fprintf(newArquivo, "%hhu ", soma / (op*op));
+ 
         }
 
      }
 
-    // return pDadosSuavizados;
-
 }
 
-void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSuavizada) {
+void gerarImgSuavizada(struct pgm *imagem, char *filename, int op, char *nomeImgSuavizada) {
 
     FILE *fp;
     char ch;
-    // char nomeImgSuavizada[100];
-
+ 
     // ALTERANDO NOME DO ARQUIVO A SER GERADO DE ACORDO COM A JANELA ESCOLHIDA
     switch (op) {
-        case 0:
-            strcpy(nomeImgSuavizada, "suavizado3x3_");
+        case 3:
+            strcpy(nomeImgSuavizada, "suavizado3x3.pgm");
             break;
 
-        case 1:
-            strcpy(nomeImgSuavizada, "suavizado5x5_");
+        case 5:
+            strcpy(nomeImgSuavizada, "suavizado5x5.pgm");
             break;
         
-        case 2:
-            strcpy(nomeImgSuavizada, "suavizado7x7_");
+        case 7:
+            strcpy(nomeImgSuavizada, "suavizado7x7.pgm");
 
     }
 
-    // JUTANDO O NOME 'suavizadoYxY_' com o nome original da imagem
-    strcat(nomeImgSuavizada, filename);
-
-
-    // printf("Nova imagem (%s) a ser criada.\n", nomeImgSuavizada);
-
-
     char path[100] = "./images/imagens_suavizadas/";
+    strcat(path,filename);
 
-
-    if (!(fp = fopen(strcat(path, nomeImgSuavizada), "w"))) {
-        
-		perror("Erro.");
+    if (!(fp = fopen(strcat(path,nomeImgSuavizada), "w"))) {
+		perror("Erro 2.");
 		exit(1);
-
 	}
 
-    // fprintf(fp, "%s\n", (pio->tipo == 2) ? "P2" : "P5");
     fprintf(fp, "%s\n", "P2");
-	fprintf(fp, "%d %d\n",pio->c, pio->r);
+	fprintf(fp, "%d %d\n",imagem->c, imagem->r);
 	fprintf(fp, "%d\n", 255);
 
     switch (op) {
-        case 0:
-            janelaTresPorTres(pio, fp);
+        case 3:
+            janelaTresPorTres(imagem, fp, op);
             break;
         
-        case 1:
-            janelaCincoPorCinco(pio, fp);
+        case 5:
+            janelaCincoPorCinco(imagem, fp);
             break;
 
-        case 2:
-            janelaSetePorSete(pio, fp);
+        case 7:
+            janelaSetePorSete(imagem, fp);
 
     }
-
+    
     fclose(fp);
 
 }

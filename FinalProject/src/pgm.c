@@ -1,29 +1,29 @@
 #include "../include/pgm.h"
 
-void readPGMImage(struct pgm *pio, char *filename, int i_path){
+void readPGMImage(struct pgm *pio, char *filename){
 
 	FILE *fp;
 	char ch;
-	const char *caminhos[] = {"./images/imagens_originais/", "./images/imagens_suavizadas/"};
+	//const char *caminhos[] = {"./images/imagens_originais/", "./images/imagens_suavizadas/"};
 	char full_path[100];
 
 	// MODIFICANDO CAMINHOS
-	if (i_path == 3) {
+	// if (i_path == 3) {
 
-		strcpy(full_path, filename);
+	// 	strcpy(full_path, filename);
 
-	} else {
+	// } else {
 
-		strcpy(full_path, caminhos[i_path]);
-		strcat(full_path, filename);
+	// 	strcpy(full_path, caminhos[i_path]);
+	// 	strcat(full_path, filename);
 
-	}
+	// }
 	
 	// printf("\nFull_path: %s\n", full_path);
 
-	if (!(fp = fopen(full_path, "r"))) {
+	if (!(fp = fopen(filename, "r"))) {
 	
-		perror("Erro.");
+		perror("Erro 1.");
 		exit(1);
 
 	}

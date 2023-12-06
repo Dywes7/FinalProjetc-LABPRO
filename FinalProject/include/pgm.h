@@ -14,11 +14,11 @@ struct pgm{
 	unsigned char *pData;	// Ponteiro para os dados
 };
 
-void readPGMImage(struct pgm *, char *, int);
+void readPGMImage(struct pgm *, char *);
 void viewPGMImage(struct pgm *);
 void writePGMImage(struct pgm *, char *);
 void gerarImgSuavizada(struct pgm*, char*, int, char*);
-void janelaTresPorTres(struct pgm*, FILE*);
+void janelaTresPorTres(struct pgm*, FILE*, int);
 void janelaCincoPorCinco(struct pgm*, FILE*);
 void janelaSetePorSete(struct pgm*, FILE*);
 void quantizarImagens(char *, char *, int, unsigned char **, unsigned char **);
