@@ -1,29 +1,25 @@
 #include "../include/pgm.h"
 
-void readPGMImage(struct pgm *pio, char *filename){
+void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
 	FILE *fp;
 	char ch;
-	//const char *caminhos[] = {"./images/imagens_originais/", "./images/imagens_suavizadas/"};
+	const char *caminhos[] = {"./images/imagens_originais/", "./images/imagens_suavizadas/"};
 	char full_path[100];
 
 	// MODIFICANDO CAMINHOS
-	// if (i_path == 3) {
-
-	// 	strcpy(full_path, filename);
-
-	// } else {
-
-	// 	strcpy(full_path, caminhos[i_path]);
-	// 	strcat(full_path, filename);
-
-	// }
+	if (i_path == 3) {
+		strcpy(full_path, filename);
+	} else {
+		strcpy(full_path, caminhos[i_path]);
+		strcat(full_path, filename);
+	}
 	
-	// printf("\nFull_path: %s\n", full_path);
+	printf("\nFull_path 1: %s\n", full_path);
 
-	if (!(fp = fopen(filename, "r"))) {
+	if (!(fp = fopen(full_path, "r"))) {
 	
-		perror("Erro 1.");
+		printf("Erro ao encontrar arquivo %s.",full_path);
 		exit(1);
 
 	}
@@ -57,7 +53,6 @@ void readPGMImage(struct pgm *pio, char *filename){
 	}	
 
 	fscanf(fp, "%d", &pio->mv);
-	//fseek(fp, 1, SEEK_CUR);
 
 	#ifdef __linux__
     	fseek(fp, 1, SEEK_CUR);
