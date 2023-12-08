@@ -1,4 +1,4 @@
-#include "../include/pgm.h"
+#include "../libs/pgm.h"
 
 void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
@@ -117,4 +117,73 @@ void viewPGMImage(struct pgm *pio) {
 	}	
 
 	printf("\n");
+}
+
+void writeImage(unsigned char* qtz_img, unsigned char* s_qtz_img, int nivel, char *n_arquivo, char *s_n_arquivo){
+
+	FILE *fp, *sfp;
+    char full_path_1[100] = "./images/imagens_quantizadas/";
+    char full_path_2[100] = "./images/imagens_quantizadas_suav/";
+
+
+    //sprintf(full_path_1 + strlen(full_path_1), "%d_", nivel);
+    //sprintf(full_path_2 + strlen(full_path_2), "%d_", nivel);
+
+    strcat(full_path_1, n_arquivo);
+    strcat(full_path_2, s_n_arquivo);
+
+	if (!(fp = fopen(full_path_1,"w"))){
+		perror("Erro.");
+		exit(1);
+	}
+
+    if (!(sfp = fopen(full_path_2,"w"))){
+		perror("Erro.");
+		exit(1);
+	}
+
+	fprintf(fp, "%s\n","P2");
+	fprintf(fp, "%d %d\n", 256, 256);
+	fprintf(fp, "%d\n", (nivel - 1));
+
+    fprintf(sfp, "%s\n","P2");
+	fprintf(sfp, "%d %d\n", 256, 256);
+	fprintf(sfp, "%d\n", (nivel - 1));
+
+    for (int k = 0; k < (256 * 256); k++) {
+        fprintf(fp, "%hhu ", *(qtz_img + k));
+        fprintf(sfp, "%hhu ", *(s_qtz_img + k));
+    }
+
+	fclose(fp);
+    fclose(sfp);
+}
+
+void writeSCM(int *matrizSCM, int tam_matriz, char nomeIMG,unsigned int nivel){
+	
+	char nomeArquivoSCM[20];
+
+	sprintf(nomeArquivoSCM, "%u_matriz_scm.txt", nivel);
+
+	FILE *arquivo = fopen(nomeArquivoSCM, "a+");
+
+    if (arquivo == NULL) {
+        fprintf(stderr, "Erro ao abrir o arquivo para escrita.\n");
+        exit(1);
+    }
+
+    for (int k = 0; k < tam_matriz; k++) {
+        if (!(k % tam_matriz)) fprintf(arquivo, "\n");
+        fprintf(arquivo, "%d, ", *(matrizSCM + k));
+    }
+
+    if (nomeIMG == '1') {
+        fprintf(arquivo, "stroma\n");
+    } else if (nomeIMG == '0') {
+        fprintf(arquivo, "epithelium\n");
+    } else {
+        fprintf(arquivo, "unknown\n");
+    }
+
+	fclose(arquivo);
 }

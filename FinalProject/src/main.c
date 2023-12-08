@@ -4,8 +4,8 @@
 #include <dirent.h>
 #include <time.h>
 
-#include "../include/pgm.h"
-#include "../include/menu.h"
+#include "../libs/pgm.h"
+#include "../libs/menu.h"
 
 int main(int argc, char *argv[]){
 	
@@ -21,8 +21,6 @@ int main(int argc, char *argv[]){
 	int k;
 	clock_t begin, end;
 	double time_per_img, time_total=0;
-	long long int a = 999999999;
-
 
 	if (argc != 2){
 
@@ -37,10 +35,10 @@ int main(int argc, char *argv[]){
 	menuFiltroMedio();
     scanf("%d", &option);
 
-	// if (option == 0 || option > 2) {
-	// 	printf("Operacao invalida.\n");
-	// 	exit(2);
-	// }
+	if (option != 3 && option != 5 && option != 7 ) {
+		printf("Operacao invalida.\n");
+		exit(2);
+	}
 	
 	/************* LOOPING DE DIRETORIO *************/
 	DIR *d;
@@ -65,7 +63,7 @@ int main(int argc, char *argv[]){
 			gerarImgSuavizada(&img, dir->d_name, option, name_img_suavizada);
 
 			quantizarImagens(dir->d_name, name_img_suavizada, nivel, &quant_img, &quant_s_img);
-
+			
 			gerarMatrizSCM(quant_img, quant_s_img, &img, nivel, dir->d_name[0]);	
 
 			end = clock();
