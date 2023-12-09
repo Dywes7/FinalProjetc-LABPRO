@@ -1,3 +1,4 @@
+
 #include "../libs/pgm.h"
 void gerarMatrizSCM(unsigned char *qtz_img, unsigned char *qtz_s_img, struct pgm *imagem,unsigned int nivel, char nomeArquivo) {
 
