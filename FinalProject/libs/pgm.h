@@ -23,6 +23,8 @@ void janelaCincoPorCinco(struct pgm*, FILE*);
 void janelaSetePorSete(struct pgm*, FILE*);
 void quantizarImagens(char *, char *, int, unsigned char **, unsigned char **);
 void criaArquivosTeste(unsigned char*, unsigned char*, int, char *, char *);
-void gerarMatrizSCM(unsigned char *, unsigned char *, struct pgm *, int, char);
+void gerarMatrizSCM(unsigned char *, unsigned char *, struct pgm *,unsigned int, char);
+void writeSCM(int *matrizSCM, int tam_matriz, char nomeArquivo,unsigned int nivel);
+void writeImage(unsigned char* qtz_img, unsigned char* s_qtz_img, int nivel, char *n_arquivo, char *s_n_arquivo);
 
 #endif
