@@ -17,7 +17,7 @@ void readPGMImage(struct pgm *pio, char *filename, int i_path){
 	
 	printf("\nFull_path 1: %s\n", full_path);
 
-	if (!(fp = fopen(full_path, "r"))) {
+	if (!(fp = fopen(full_path, "rb"))) {
 	
 		printf("Erro ao encontrar arquivo %s.",full_path);
 		exit(1);

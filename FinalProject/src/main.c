@@ -1,3 +1,13 @@
+// ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+// ∗ Aluno: Alyne Maria
+// ∗ Matricula: 20222045050034
+// ∗ Aluno: 
+// ∗ Matricula: 
+// ∗ Avaliacao 04: Trabalho Final
+// ∗ 04.505.23−2023.2 − Prof. DanielFerreira
+// ∗ Compilador: ( DevC++ ou gcc ) versao 9.4.0
+// ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,7 +78,7 @@ int main(int argc, char *argv[]){
 
 			end = clock();
 
-			time_total = (double)(end - begin) / CLOCKS_PER_SEC;
+			time_total += (double)(end - begin) / CLOCKS_PER_SEC;
 
         }
 
