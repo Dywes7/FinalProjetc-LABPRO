@@ -1,6 +1,6 @@
 # Computação da Matriz SCM em Imagens
 ## Introdução
-Este repositório contém a implementação em Linguagem C para calcular a Matriz de Coocorrência Estrutural (SCM) em imagens. A SCM é uma ferramenta essencial para descrever as características de uma imagem e, neste contexto, é aplicada em conjunto com experimentos de classificação utilizando a biblioteca Weka.
+Este repositório contém a implementação em Linguagem C para calcular a Matriz de Coocorrência Estrutural (SCM) em imagens. A SCM é uma ferramenta para descrever as características de uma imagem e, neste contexto, é aplicada em conjunto com experimentos de classificação utilizando a ferramenta Weka.
 ## Objetivos
 O objetivo principal deste projeto é proporcionar uma implementação eficiente para a computação da SCM entre uma imagem e sua versão suavizada. O processo inclui a quantização da imagem, o cálculo da SCM e a vetorização dos valores resultantes, que são então gravados em um arquivo de características para análises posteriores.
 
