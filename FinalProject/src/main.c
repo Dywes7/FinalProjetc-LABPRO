@@ -1,3 +1,13 @@
+// ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+// ∗ Aluno: Alyne Maria
+// ∗ Matricula: 20222045050034
+// ∗ Aluno: 
+// ∗ Matricula: 
+// ∗ Avaliacao 04: Trabalho Final
+// ∗ 04.505.23−2023.2 − Prof. DanielFerreira
+// ∗ Compilador: ( DevC++ ou gcc ) versao 9.4.0
+// ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,10 +33,8 @@ int main(int argc, char *argv[]){
 	double time_per_img, time_total=0;
 
 	if (argc != 2){
-
 		printf("Formato: \n\t %s <quantidade de niveis>\n", argv[0]);
 		exit(1);
-
 	}
 
 	int nivel = atoi(argv[1]);
@@ -39,6 +47,9 @@ int main(int argc, char *argv[]){
 		printf("Operacao invalida.\n");
 		exit(2);
 	}
+
+	/************ ARQUIVO .ARFF *************************/
+	FILE *file = initArquivoARFF(nivel);
 	
 	/************* LOOPING DE DIRETORIO *************/
 	DIR *d;
@@ -46,8 +57,7 @@ int main(int argc, char *argv[]){
     d = opendir("./images/imagens_originais");
 
     if (d) {
-	
-
+		printf("Processando...\n");
         while ((dir = readdir(d)) != NULL) {
 
 			if(dir->d_name[0] == '.' ){
@@ -56,31 +66,26 @@ int main(int argc, char *argv[]){
 
 			begin = clock();
 
-            printf("%s\n", dir->d_name);
-
 			readPGMImage(&img, dir->d_name, 0);
 
 			gerarImgSuavizada(&img, dir->d_name, option, name_img_suavizada);
 
 			quantizarImagens(dir->d_name, name_img_suavizada, nivel, &quant_img, &quant_s_img);
-<<<<<<< HEAD
-			
-=======
 
-			// printf("\n*****CHEGOU ATE AQUI 4\n");
->>>>>>> main
-			gerarMatrizSCM(quant_img, quant_s_img, &img, nivel, dir->d_name[0]);	
+			gerarMatrizSCM(quant_img, quant_s_img, &img, nivel, dir->d_name[0], file);	
 
 			end = clock();
 
-			time_total = (double)(end - begin) / CLOCKS_PER_SEC;
+			time_total += (double)(end - begin) / CLOCKS_PER_SEC;
 
         }
 
-		printf("Tempo Total: %lf\n",time_total);
+		printf("Tempo Total: %.2lf\n",time_total);
 
         closedir(d);
     }
+
+	fclose(file);
 
 	return 0;
 }

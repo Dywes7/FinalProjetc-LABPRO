@@ -1,7 +1,7 @@
 all: bin/main.e
 
-bin/main.e: obj/main.o obj/gerar_matriz_scm.o obj/pgm.o obj/quantizar_imgs.o obj/suavizar_img.o obj/menu.o
-	gcc -o bin/main.e obj/main.o obj/gerar_matriz_scm.o obj/pgm.o obj/quantizar_imgs.o obj/suavizar_img.o obj/menu.o
+bin/main.e: obj/main.o obj/gerar_matriz_scm.o obj/pgm.o obj/quantizar_imgs.o obj/suavizar_img.o obj/menu.o obj/cria_arquivo_arff.o
+	gcc -o bin/main.e obj/main.o obj/gerar_matriz_scm.o obj/pgm.o obj/quantizar_imgs.o obj/suavizar_img.o obj/menu.o obj/cria_arquivo_arff.o
 
 obj/main.o: src/main.c 
 	gcc -o obj/main.o -c src/main.c
@@ -20,6 +20,9 @@ obj/suavizar_img.o: src/suavizar_img.c
 
 obj/menu.o: src/menu.c 
 	gcc -o obj/menu.o -c src/menu.c
+
+obj/cria_arquivo_arff.o: src/cria_arquivo_arff.c
+	gcc -o obj/cria_arquivo_arff.o -c src/cria_arquivo_arff.c
 
 clean:
 	rm -f obj/*.o bin/main.e

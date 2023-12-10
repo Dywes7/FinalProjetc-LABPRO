@@ -14,17 +14,16 @@ struct pgm{
 	unsigned char *pData;	// Ponteiro para os dados
 };
 
+FILE *initArquivoARFF(int);
 void readPGMImage(struct pgm *, char *, int);
 void viewPGMImage(struct pgm *);
 void writePGMImage(struct pgm *, char *);
 void gerarImgSuavizada(struct pgm*, char*, int, char*);
-void janelaTresPorTres(struct pgm*, FILE*);
-void janelaCincoPorCinco(struct pgm*, FILE*);
-void janelaSetePorSete(struct pgm*, FILE*);
+void filtroMedia(struct pgm *, FILE *, int);
 void quantizarImagens(char *, char *, int, unsigned char **, unsigned char **);
 void criaArquivosTeste(unsigned char*, unsigned char*, int, char *, char *);
-void gerarMatrizSCM(unsigned char *, unsigned char *, struct pgm *,unsigned int, char);
-void writeSCM(int *matrizSCM, int tam_matriz, char nomeArquivo,unsigned int nivel);
-void writeImage(unsigned char* qtz_img, unsigned char* s_qtz_img, int nivel, char *n_arquivo, char *s_n_arquivo);
+void gerarMatrizSCM(unsigned char *, unsigned char *, struct pgm *, unsigned int, char, FILE *);
+void writeSCM(int *, int, char, unsigned int, FILE *);
+void writeImage(unsigned char*, unsigned char*, int, char *, char *);
 
 #endif
