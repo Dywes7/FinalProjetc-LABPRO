@@ -32,7 +32,6 @@ void gerarImgSuavizada(struct pgm *pio, char *filename, int op, char *nomeImgSua
     strcpy(nomeImgSuavizada, filename);
     char path[100] = "./images/imagens_suavizadas/";
 
-
     if (!(fp = fopen(strcat(path, nomeImgSuavizada), "w"))) {
 		perror("Erro.");
 		exit(1);

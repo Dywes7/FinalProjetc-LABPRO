@@ -1,6 +1,6 @@
 
 #include "../libs/pgm.h"
-void gerarMatrizSCM(unsigned char *qtz_img, unsigned char *qtz_s_img, struct pgm *imagem,unsigned int nivel, char nomeArquivo) {
+void gerarMatrizSCM(unsigned char *qtz_img, unsigned char *qtz_s_img, struct pgm *imagem,unsigned int nivel, char nomeArquivo, FILE *arq) {
 
     int *matrizSCM;
     int tam_matriz = nivel * nivel;
@@ -18,5 +18,5 @@ void gerarMatrizSCM(unsigned char *qtz_img, unsigned char *qtz_s_img, struct pgm
         (*(matrizSCM + (linha * nivel + coluna)))++;
     }
 
-    writeSCM(matrizSCM,tam_matriz,nomeArquivo,nivel);
+    writeSCM(matrizSCM, tam_matriz, nomeArquivo, nivel, arq);
 }

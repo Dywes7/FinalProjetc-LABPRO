@@ -17,7 +17,4 @@ void quantizarImagens(char *filename, char *s_filename, int nivel, unsigned char
         *((*q_s_img) + i) = *(s_imagem.pData + i) / intervalo;
     }
 
-    // writeImage(*q_img, *q_s_img, nivel, filename, s_filename);
-
-	printf("\n");
 }
