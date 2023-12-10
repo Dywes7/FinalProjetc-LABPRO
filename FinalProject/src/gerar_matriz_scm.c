@@ -2,7 +2,7 @@
 #include "../libs/pgm.h"
 void gerarMatrizSCM(unsigned char *qtz_img, unsigned char *qtz_s_img, struct pgm *imagem,unsigned int nivel, char nomeArquivo, FILE *arq) {
 
-    int *matrizSCM;
+    unsigned int *matrizSCM;
     int tam_matriz = nivel * nivel;
 
     matrizSCM = (int*)malloc(tam_matriz * sizeof(int));

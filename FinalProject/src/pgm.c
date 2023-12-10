@@ -77,7 +77,7 @@ void readPGMImage(struct pgm *pio, char *filename, int i_path){
 
 }
 
-void writeSCM(int *matrizSCM, int tam_matriz, char nomeIMG,unsigned int nivel, FILE *arquivo){
+void writeSCM(unsigned int *matrizSCM, int tam_matriz, char nomeIMG,unsigned int nivel, FILE *arquivo){
 
     for (int k = 0; k < tam_matriz; k++) {
         if (!(k % tam_matriz)) fprintf(arquivo, "\n");

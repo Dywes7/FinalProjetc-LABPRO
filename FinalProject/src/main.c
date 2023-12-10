@@ -1,11 +1,11 @@
 // ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
-// ∗ Aluno: Alyne Maria
+// ∗ Aluno: Alyne Maria Matos de Macedo 
 // ∗ Matricula: 20222045050034
-// ∗ Aluno: 
-// ∗ Matricula: 
+// ∗ Aluno: Diogo Wesley Moreira Feitosa
+// ∗ Matricula: 20211045050551
 // ∗ Avaliacao 04: Trabalho Final
 // ∗ 04.505.23−2023.2 − Prof. DanielFerreira
-// ∗ Compilador: ( DevC++ ou gcc ) versao 9.4.0
+// ∗ Compilador: ( gcc ) versao 9.4.0
 // ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
 
 #include <stdio.h>
