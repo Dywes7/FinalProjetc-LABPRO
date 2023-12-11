@@ -28,7 +28,6 @@ int main(int argc, char *argv[]){
 	// Ponteiros para elementos das matrizes quantizadas
 	unsigned char *quant_img, *quant_s_img;
 	
-	int k;
 	clock_t begin, end;
 	double time_per_img, time_total=0;
 
